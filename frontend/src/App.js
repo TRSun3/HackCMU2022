@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import map from './images/map.jpg';
 import './App.css';
+import logo from './images/logo.svg';
 
 function App() {
+
+  const onRightArrowPress = () => {
+
+  };
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Hello World!
-        </a>
-      </header>
+    <div className="App">      
+        <img src={map} className="Map" alt="map" />
+        <img src={logo} className="PlayerObject" alt="player"/>
     </div>
   );
 }
