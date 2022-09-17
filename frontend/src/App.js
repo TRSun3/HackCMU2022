@@ -16,24 +16,30 @@ function App() {
 
 useEffect(() => {
   window.addEventListener('keydown', handleKeyDown);
+
+  
+
   return () => {
     window.removeEventListener('keydown', handleKeyDown);
   };
 }, [xCoord, yCoord]);
 
 const handleSubmit = () => {
-  console.log("its running");
+ 
   let databody = {
-    id: playerTag,
+    "_id": playerTag,
     x: xCoord,
     y: yCoord
   };
-  return fetch("http://localhost:8000/", {
+  console.log(databody);
+  return fetch("http://localhost:8000/person", {
     method: "POST",
-    body: databody,
+    body: JSON.stringify(databody),
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
     },
   })
     .then((res) => res.json())
@@ -59,6 +65,7 @@ const handleKeyDown = async (event) => {
       await handleSubmit();
     }
   };
+
 
   
   return (

@@ -6,15 +6,14 @@ from models import Person
 
 router = APIRouter()
 
-@router.post("/", response_description="Update person", status_code=status.HTTP_201_CREATED, response_model=Person)
+@router.post("/", response_description="Update person", response_model=Person)
 def update_person(request: Request, person: Person = Body(...)):
+    print(request)
+    print(person)
     person = jsonable_encoder(person)
-    new_person = request.app.database["persons"].insert_one(person)
-    created_person = request.app.database["persons"].find_one(
-        {"_id": new_person.inserted_id}
-    )
-
-    return created_person
+    result=request.app.database["persons"].update_one({'_id': person['_id']}, {'$set': {'x': person['x'], 'y': person['y']}})
+    print(result)
+    return {"id":"0","x":0,"y":0}
 
 @router.get("/{id}", response_description="Get a single person by id", response_model=Person)
 def find_person(id: str, request: Request):
